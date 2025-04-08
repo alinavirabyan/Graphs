@@ -1,0 +1,53 @@
+import heapq
+
+def dijkstra():
+    V = int(input("Մուտքագրեք գագաթների քանակը: "))
+    graph = {i: [] for i in range(V)}
+    E = int(input("Մուտքագրեք կապերի քանակը: "))
+    
+    print("Մուտքագրեք կապերը (գագաթ 1, գագաթ 2, կշիռ):")
+    for _ in range(E):
+        u, v, w = map(int, input().split())
+        graph[u-1].append((v-1, w))
+        graph[v-1].append((u-1, w))
+
+    distances = [float('inf')] * V
+    start_vertex = int(input("Մուտքագրեք մեկնարկային գագաթը (1-ից սկսած): ")) - 1
+    distances[start_vertex] = 0
+    
+    pq = [(0, start_vertex)]
+    visited = [False] * V
+    
+    while pq:
+        current_distance, u = heapq.heappop(pq)
+        
+        if visited[u]:
+            continue
+        
+        visited[u] = True
+        
+        for v, weight in graph[u]:
+            if visited[v]:
+                continue
+            new_dist = current_distance + weight
+            if new_dist < distances[v]:
+                distances[v] = new_dist
+                heapq.heappush(pq, (new_dist, v))
+    
+    print("\nԿշիռների մատրիցը:")
+    matrix = [[float('inf')] * V for _ in range(V)]
+    for u in graph:
+        for v, weight in graph[u]:
+            matrix[u][v] = weight
+
+    for row in matrix:
+        print(row)
+
+    print("\nԿարճագույն ճանապարհները գագաթից (1-ից սկսած):")
+    for i in range(V):
+        if distances[i] == float('inf'):
+            print(f"Գագաթ {i+1}: Անհասանելի")
+        else:
+            print(f"Գագաթ {i+1}: {distances[i]}")
+
+dijkstra()
