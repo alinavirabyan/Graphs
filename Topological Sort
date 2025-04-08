@@ -1,0 +1,29 @@
+def dfs(graph, node, visited, stack):
+    visited.add(node)
+    
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited, stack)
+    
+    stack.append(node)
+
+def topological_sort(graph):
+    visited = set()
+    stack = []
+    
+    for node in graph:
+        if node not in visited:
+            dfs(graph, node, visited, stack)
+    
+    return stack[::-1]
+
+graph = {
+    5: [2, 0],
+    4: [0, 1],
+    2: [3],
+    3: [],
+    1: [3],
+    0: []
+}
+
+print(topological_sort(graph))
