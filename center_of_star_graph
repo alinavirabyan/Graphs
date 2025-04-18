@@ -1,0 +1,15 @@
+def find_center(edges):
+    a = edges[0][0] #առաջին կողի առաջին տարր
+    b = edges[0][1] #առաջին կողի երկրորդ տարր
+    
+    if a == edges[1][0] or a == edges[1][1]: # եթե երկրորդ կողի տարրերինա հավասար 
+        return a
+    else:
+        return b
+edges = [[1, 8], [8, 4], [8, 5]]
+
+print('center vertex: ',find_center(edges)) 
+vertex = len(edges) + 1
+edg = vertex - 1
+print("vertex:", vertex)
+print('edg: ', edg)
