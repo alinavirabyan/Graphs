@@ -1,0 +1,40 @@
+def kahn_topological_sort(graph):
+    indegree = {}
+    for node in graph:
+        indegree[node] = 0
+
+    for node in graph:
+        for neighbor in graph[node]:
+            indegree[neighbor] += 1
+
+    queue = []
+    for node in graph:
+        if indegree[node] == 0:
+            queue.append(node)
+
+    topo_sort = []
+
+    while queue:
+        node = queue.pop(0)
+        topo_sort.append(node)
+
+        for neighbor in graph[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(topo_sort) == len(graph):
+        return topo_sort
+    else:
+        return "Cycle detected"
+
+graph = {
+    5: [2, 0],
+    4: [0, 1],
+    2: [3],
+    3: [],
+    1: [3],
+    0: []
+}
+
+print(kahn_topological_sort(graph))
