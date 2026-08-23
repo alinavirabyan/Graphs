@@ -1,53 +1,42 @@
-````markdown
-# Dungeon Problem
+# Dungeon Game
 
-This project demonstrates the **Dungeon Problem algorithm** for finding the minimum initial health required to reach the bottom-right cell of a dungeon while keeping the health above `0`.
-
-The algorithm uses **Dynamic Programming (DP)** to calculate the minimum health required at each cell.
+This project demonstrates the solution to the **Dungeon Game** problem using Dynamic Programming. The objective is to find the minimum initial health required for a knight to rescue a princess in a dungeon grid, starting from the top-left corner and reaching the bottom-right corner, ensuring the knight's health never drops to 0 or below.
 
 ## How It Works
 
-1. Create a DP table with the same dimensions as the dungeon.
-2. Start from the bottom-right cell.
-3. Calculate the minimum health required to survive the destination cell.
-4. Fill the last column from bottom to top.
-5. Fill the last row from right to left.
-6. For each remaining cell, check the minimum health required from moving down or right.
-7. Choose the path that requires less health.
-8. Subtract the current cell's value from the required health.
-9. Make sure the required health is always at least `1`.
-10. Return the value at `dp[0][0]`.
+1. Create a 2D dynamic programming table (`dp`) of the same dimensions as the grid.
+2. Start from the bottom-right corner (destination) and set the minimum health required at that final cell.
+3. Calculate the required health for the bottom row and the rightmost column moving backward.
+4. For all other cells, select the minimum health needed between moving right or down, and subtract the cell's value.
+5. Apply `max(1, ...)` at each step to ensure health never falls to 0 or below.
+6. The top-left cell (`dp[0][0]`) stores the minimum initial health required to start the journey.
 
 ## Example
 
-For the dungeon:
+For the given grid:
 
-```text
-[
-    [-2, -3,  3],
+```python
+grid = [
+    [-2, -3, 3],
     [-5, -10, 1],
     [10, 30, -5]
 ]
-````
 
-The minimum initial health required is:
-
-```text
-7
 ```
+
+The algorithm calculates that the minimum initial health required to survive the path is `7`.
 
 ## Complexity
 
-* **Time Complexity:** O(m × n)
-* **Space Complexity:** O(m × n)
+* **Time Complexity:** O(M × N)
+* **Space Complexity:** O(M × N)
 
-Where `m` is the number of rows and `n` is the number of columns.
+Where M is the number of rows and N is the number of columns in the grid.
 
 ## Main Concept
 
-**Dynamic Programming — Grid-Based Problem**
+Dynamic Programming — 2D Grid Traversal / Minimum Health Path
 
 ## File
 
-* [`dungeon.py`](https://github.com/alinavirabyan/Graphs/blob/main/DungeonProblem/dungeon.py) — Implementation of the Dungeon Problem algorithm.
-
+`dungeon.py` — Implementation of the Dungeon Game algorithm.
