@@ -1,0 +1,46 @@
+def dfs(graph, node, visited, stack):
+    visited.add(node)
+    
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited, stack)
+    
+    stack.append(node)
+
+def topological_sort(graph):
+    visited = set()
+    stack = []
+    
+    for node in graph:
+        if node not in visited:
+            dfs(graph, node, visited, stack)
+    
+    return stack[::-1]
+
+def longest_path(graph, start):
+    topo_sort = topological_sort(graph)
+    
+    dist = {node: float('-inf') for node in graph}
+    dist[start] = 0
+    
+    for node in topo_sort:
+        if dist[node] != float('-inf'):
+            for neighbor, weight in graph[node]:
+                if dist[neighbor] < dist[node] + weight:
+                    dist[neighbor] = dist[node] + weight
+    
+    return dist
+
+
+graph = {
+    0: [(1, 5), (2, 3)],
+    1: [(3, 6)],
+    2: [(3, 7)],
+    3: [(4, 2)],
+    4: []
+}
+
+start_node = 0
+longest_paths = longest_path(graph, start_node)
+
+print(longest_paths)
