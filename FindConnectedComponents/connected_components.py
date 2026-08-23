@@ -1,0 +1,30 @@
+def dfs(graph, node, visited):
+    visited.add(node)
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+def connected_components(graph):
+    visited = set()
+    components = []
+
+    for node in graph:
+        if node not in visited:
+            component = set()
+            dfs(graph, node, component)
+            components.append(component)
+            visited.update(component)
+    
+    return components
+
+
+graph = {
+    0: [1, 2],
+    1: [0],
+    2: [0],
+    3: [4],
+    4: [3],
+    5: []
+}
+
+print(connected_components(graph))
