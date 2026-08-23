@@ -39,4 +39,4 @@ Dynamic Programming — 2D Grid Traversal / Minimum Health Path
 
 ## File
 
-`dungeon.py` — Implementation of the Dungeon Game algorithm.
+[`dungeon.py`](https://github.com/alinavirabyan/Graphs/blob/main/DungeonProblem/dungeon.py) — Implementation of the Dungeon Game algorithm.
